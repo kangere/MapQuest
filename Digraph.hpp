@@ -32,6 +32,7 @@ class Digraph {
 protected:
     unsigned int numberOfVertices = 0;
     unsigned int numberOfEdges = 0;
+
     std::vector<Node*> vertex;
     std::vector< std::vector< int > > distMatrix;
 
@@ -42,7 +43,8 @@ public:
         vertex.push_back(n);
         numberOfVertices++;
         distMatrix.resize(numberOfVertices);
-        for (int i = 0; i < numberOfVertices; i++) distMatrix[i].resize(numberOfVertices);
+        for (unsigned int i = 0; i < numberOfVertices; i++)
+            distMatrix[i].resize(numberOfVertices);
     }
 
     unsigned int noVertices();
@@ -52,6 +54,9 @@ public:
     void delEdge(int source, int dest);
     int isEdge(int source, int dest);
     int dijkstra(int source, int dest);
+
+    //tempfunction
+    void displayGraph();
 };
 
 #endif //MAPQUEST_DIGRAPH_HPP
