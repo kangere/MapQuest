@@ -3,6 +3,8 @@
 
 #include "Digraph.hpp"
 #include <iostream>
+#include <limits.h>
+
 /**
  * Function returns number of vertices in the graph
  * @return number of vertices
@@ -20,13 +22,11 @@ unsigned int Digraph::noEdges()
 void Digraph::resetEdges()
 {
     //loop through each edge
-    for(const std::vector<int> edge:distMatrix)
+    for(int i = 0; i < distMatrix.size(); i++)
     {
-        //loop through each
-        for(int weight: edge)
+        for(int j = 0; j < distMatrix[i].size(); j++)
         {
-            //weight with large numbers are treated as empty or null
-            weight = 5;
+            distMatrix[i][j] = INT_MAX;
         }
     }
 }
@@ -39,8 +39,14 @@ void Digraph::resetEdges()
  */
 void Digraph::addEdge(int source, int dest, int wt)
 {
+
+//    //check if edge exists before incrementing total number
+//    if(distMatrix[source][dest] == INT_MAX && distMatrix[dest][source] == INT_MAX)
+//        numberOfEdges++;
+
     //add weight of an edge
     distMatrix[source][dest] = wt;
+    numberOfEdges++;
 
 }
 
@@ -51,7 +57,7 @@ void Digraph::addEdge(int source, int dest, int wt)
  */
 void Digraph::delEdge(int source, int dest)
 {
-    distMatrix[source][dest] = 2100000000;
+    distMatrix[source][dest] = INT_MAX;
 }
 
 int Digraph::isEdge(int source, int dest)
@@ -66,14 +72,14 @@ int Digraph::dijkstra(int source, int dest)
 //temp function
 void Digraph::displayGraph()
 {
-    for( const std::vector<int> &edge  :distMatrix)
+    for( int i = 0; i < distMatrix.size() ; i++)
     {
-        for (const int &weight : edge)
+        for (int j = 0; j < distMatrix[i].size(); j++)
         {
-            std::cout << weight << " ";
+            std::cout << distMatrix[i][j] << " ";
         }
-
         std::cout << std::endl;
     }
+    std::cout << "Number of Edges: " << numberOfEdges << std::endl;
 
 }
