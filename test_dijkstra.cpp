@@ -24,17 +24,20 @@ int main() {
     g.resetEdges();
 
     g.displayGraph();
-//    dataFile >> p;
-//    dataFile >> q;
-//    dataFile >> r;
-//    while (p > -1) {
-//        g.addEdge(p, q, r);
-//        g.addEdge(q, p, r);
-//        dataFile >> p;
-//        dataFile >> q;
-//        dataFile >> r;
-//    }
-//    dataFile.close();
+
+   dataFile >> p;
+   dataFile >> q;
+   dataFile >> r;
+   while (p > -1) {
+       g.addEdge(p, q, r);
+       g.addEdge(q, p, r);
+       dataFile >> p;
+       dataFile >> q;
+       dataFile >> r;
+   }
+   dataFile.close();
+
+   g.displayGraph();
 //
 //    cout << "TEST 1. Los Angeles to Boston" << endl;
 //    p = g.dijkstra(4, 1);
