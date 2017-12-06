@@ -51,7 +51,7 @@ public:
     void resetEdges();
     void addEdge(int source, int dest, int wt);
     void delEdge(int source, int dest);
-    int isEdge(int source, int dest);
+    bool isEdge(int source, int dest);
     int dijkstra(int source, int dest);
 
     //tempfunction

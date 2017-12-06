@@ -40,13 +40,13 @@ void Digraph::resetEdges()
 void Digraph::addEdge(int source, int dest, int wt)
 {
 
-//    //check if edge exists before incrementing total number
-//    if(distMatrix[source][dest] == INT_MAX && distMatrix[dest][source] == INT_MAX)
-//        numberOfEdges++;
+   //check if edge exists before incrementing total number
+   if(distMatrix[source][dest] == INT_MAX && distMatrix[dest][source] == INT_MAX)
+       numberOfEdges++;
 
     //add weight of an edge
     distMatrix[source][dest] = wt;
-    numberOfEdges++;
+    // numberOfEdges++;
 
 }
 
@@ -60,12 +60,54 @@ void Digraph::delEdge(int source, int dest)
     distMatrix[source][dest] = INT_MAX;
 }
 
-int Digraph::isEdge(int source, int dest)
+bool Digraph::isEdge(int source, int dest)
 {
+	if(distMatrix[source][dest] < INT_MAX)
+		return true;
+	else
+		return false;
 }
 
 int Digraph::dijkstra(int source, int dest)
 {
+	std::vector<int> D;
+	
+	//initialise all vertices to infinte number
+	D.resize(numberOfVertices,INT_MAX);
+
+	//set distance of source to itself as 0
+	D[source] = 0;
+
+	for(int i = 0; i < numberOfVertices; i++)
+	{
+		//find minvertex
+		int v = 0;
+		for(int j = 0; j < numberOfVertices;  j++)
+			if(vertex[j]->getStatus == NOT_VISITED){v = j; break;}
+		for(int j = 0; j < numberOfVertices; i++){
+			if(vertex[j]->getStatus == NOT_VISITED && (D[j] < D[v]))
+				v = j;
+		}
+
+
+		//set vertice as visited
+		vertex[v]->setStatus(VISITED);
+		
+		if(D[dest] < INT_MAX) return D[dest];	
+
+		//relax edges
+		for(int w = 0; w < numberOfVertices;w++){
+			//visit only valid edges
+			if(isEdge(v,w))
+			{
+				if(D[w] > (D[v] + distMatrix[v][w]))
+					D[w] = D[v] + distMatrix[v][w];
+			}
+		}	
+
+	}
+
+
 }
 
 
