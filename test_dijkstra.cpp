@@ -37,18 +37,18 @@ int main() {
        dataFile.close();
 
        g.displayGraph();
-//
-//    cout << "TEST 1. Los Angeles to Boston" << endl;
-//    p = g.dijkstra(4, 1);
-//    cout << "*** Final distance: " << p << " miles." << endl;
-//    if (p != 2602) cout << "TEST FAILED";
-//    else cout << "Test passed";
-//    cout << endl << endl;
-//
-//    cout << "TEST 2. San Francisco to Miami" << endl;
-//    p = g.dijkstra(7, 5);
-//    cout << "*** Final distance: " << p << " miles." << endl;
-//    if (p != 3056) cout << "TEST FAILED";
-//    else cout << "Test passed";
-//    cout << endl << endl;
+
+    cout << "TEST 1. Los Angeles to Boston" << endl;
+    p = g.dijkstra(4, 1);
+    cout << "*** Final distance: " << p << " miles." << endl;
+    if (p != 2602) cout << "TEST FAILED";
+    else cout << "Test passed";
+    cout << endl << endl;
+
+    cout << "TEST 2. San Francisco to Miami" << endl;
+    p = g.dijkstra(7, 5);
+    cout << "*** Final distance: " << p << " miles." << endl;
+    if (p != 3056) cout << "TEST FAILED";
+    else cout << "Test passed";
+    cout << endl << endl;
 }
