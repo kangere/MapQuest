@@ -54,11 +54,14 @@ void Digraph::delEdge(int source, int dest) {
 }
 
 bool Digraph::isEdge(int source, int dest) {
-    if (distMatrix[source][dest] < INT_MAX)
-        return true;
-    else
-        return false;
+    return (distMatrix[source][dest] < INT_MAX);
 }
+
+/**
+*	Calculates shortest path from source to dest
+*
+*
+*/
 
 int Digraph::dijkstra(int source, int dest) {
     std::vector<int> D;
