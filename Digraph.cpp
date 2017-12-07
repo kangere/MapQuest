@@ -13,24 +13,31 @@ unsigned int Digraph::noVertices() {
     return numberOfVertices;
 }
 
+/**
+ * returns number of edges in the graph
+ * @return the number of edges in the graph
+ */
 unsigned int Digraph::noEdges() {
     return numberOfEdges;
 }
 
+/**
+ * Function resets all edges so as they don't contain a  valid weight
+ */
 void Digraph::resetEdges() {
     //loop through each edge
-    for (int i = 0; i < distMatrix.size(); i++) {
-        for (int j = 0; j < distMatrix[i].size(); j++) {
-            distMatrix[i][j] = INT_MAX;
+    for (auto &edge: distMatrix) {
+        for (auto &weight: edge) {
+            weight = INT_MAX;
         }
     }
 }
 
 /**
  * Adds an edge to the graph
- * @param source
- * @param dest
- * @param wt
+ * @param source the starting point of the path
+ * @param dest the end of the path
+ * @param wt the weight of the edge
  */
 void Digraph::addEdge(int source, int dest, int wt) {
 
@@ -40,7 +47,6 @@ void Digraph::addEdge(int source, int dest, int wt) {
 
     //add weight of an edge
     distMatrix[source][dest] = wt;
-    // numberOfEdges++;
 
 }
 
@@ -53,37 +59,44 @@ void Digraph::delEdge(int source, int dest) {
     distMatrix[source][dest] = INT_MAX;
 }
 
+/**
+ * determines whether the two vertices given form an edge
+ * @param source the first vertice
+ * @param dest second vertice
+ * @return true if is valid edge false otherwise
+ */
 bool Digraph::isEdge(int source, int dest) {
     return (distMatrix[source][dest] < INT_MAX);
 }
 
 /**
-*	Calculates shortest path from source to dest
-*
-*
-*/
-
+ * Algorithm retuns the shortest path from source to dest in graph
+ * @param source the point where the path starts
+ * @param dest the destination of the path
+ * @return the shortest distance
+ */
 int Digraph::dijkstra(int source, int dest) {
     std::vector<int> D;
 
     //initialise all vertices to infinte number
-    D.resize(numberOfVertices, INT_MAX);
+    D.resize(noVertices(), INT_MAX);
 
     //set distance of source to itself as 0
     D[source] = 0;
 
-    for (int i = 0; i < numberOfVertices; i++) {
+    for (int i = 0; i < noVertices(); i++) {
         //find minvertex
         int v = 0;
-        for (int j = 0; j < numberOfVertices; j++)
+        for (int j = 0; j < noVertices(); j++)
             if (vertex[j]->getStatus() == NOT_VISITED) {
                 v = j;
                 break;
             }
-        for (int j = 0; j < numberOfVertices; j++) {
+        for (int j = 0; j < noVertices(); j++) {
             if (vertex[j]->getStatus() == NOT_VISITED && (D[j] < D[v]))
                 v = j;
         }
+
 
 
         //set vertice as visited
@@ -99,7 +112,7 @@ int Digraph::dijkstra(int source, int dest) {
         }
 
         //relax edges
-        for (int w = 0; w < numberOfVertices; w++) {
+        for (int w = 0; w < noVertices(); w++) {
             //visit only valid edges
             if (isEdge(v, w)) {
                 if (D[w] > (D[v] + distMatrix[v][w]))
@@ -109,15 +122,14 @@ int Digraph::dijkstra(int source, int dest) {
 
     }
 
-
 }
 
 
 //temp function
 void Digraph::displayGraph() {
-    for (int i = 0; i < distMatrix.size(); i++) {
-        for (int j = 0; j < distMatrix[i].size(); j++) {
-            std::cout << distMatrix[i][j] << " ";
+    for (auto &edge: distMatrix) {
+        for (auto &weight: edge) {
+            std::cout << weight << " ";
         }
         std::cout << std::endl;
     }
