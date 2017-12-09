@@ -4,6 +4,8 @@
 #include "Digraph.hpp"
 #include <iostream>
 #include <limits.h>
+#include <map>
+
 
 /**
  * Function returns number of vertices in the graph
@@ -76,7 +78,15 @@ bool Digraph::isEdge(int source, int dest) {
  * @return the shortest distance
  */
 int Digraph::dijkstra(int source, int dest) {
+
+    //return 0 if source and dest are the same
+    if(source == dest)
+        return 0;
+
     std::vector<int> D;
+
+    //map stores paths
+    std::map < int ,std::vector<std::string>> paths;
 
     //initialise all vertices to infinte number
     D.resize(noVertices(), INT_MAX);
@@ -117,6 +127,8 @@ int Digraph::dijkstra(int source, int dest) {
             if (isEdge(v, w)) {
                 if (D[w] > (D[v] + distMatrix[v][w]))
                     D[w] = D[v] + distMatrix[v][w];
+
+
             }
         }
 
@@ -124,15 +136,3 @@ int Digraph::dijkstra(int source, int dest) {
 
 }
 
-
-//temp function
-void Digraph::displayGraph() {
-    for (auto &edge: distMatrix) {
-        for (auto &weight: edge) {
-            std::cout << weight << " ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << "Number of Edges: " << numberOfEdges << std::endl;
-
-}

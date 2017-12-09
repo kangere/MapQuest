@@ -36,7 +36,7 @@ int main() {
        }
        dataFile.close();
 
-       g.displayGraph();
+
 
     cout << "TEST 1. Los Angeles to Boston" << endl;
     p = g.dijkstra(4, 1);

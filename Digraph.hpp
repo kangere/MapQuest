@@ -54,8 +54,6 @@ public:
     bool isEdge(int source, int dest);
     int dijkstra(int source, int dest);
 
-    //tempfunction
-    void displayGraph();
 };
 
 #endif //MAPQUEST_DIGRAPH_HPP
